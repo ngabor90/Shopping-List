@@ -4,7 +4,7 @@ import Form from "./Form";
 import ShoppingList from "./ShoppingList";
 import Stats from "./Stats";
 
-const API_URL = "http://localhost:8000/api/items";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function App() {
   const [items, setItems] = useState([]);
