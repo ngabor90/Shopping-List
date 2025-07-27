@@ -16,7 +16,8 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'description' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'note' => 'nullable|string|max:255',
             'quantity' => 'required|integer|min:1',
             'packed' => 'boolean',
         ]);

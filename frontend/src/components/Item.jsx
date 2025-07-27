@@ -1,7 +1,7 @@
 export default function Item({ item, onDeleteItem, onToggleItem }) {
   function handleDelete() {
     const confirmed = window.confirm(
-      `Are you sure you want to delete "${item.description}"?`
+      `Are you sure you want to delete "${item.name}"?`
     );
     if (confirmed) onDeleteItem(item.id);
   }
@@ -14,7 +14,12 @@ export default function Item({ item, onDeleteItem, onToggleItem }) {
         onChange={() => onToggleItem(item.id)}
       />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
-        {item.quantity} {item.description}
+        {item.quantity}  {item.name}
+        {item.note && (
+          <span style={{ fontStyle: "italic", marginLeft: "0.5rem", color: "#666" }}>
+            — {item.note}
+          </span>
+        )}
       </span>
       <button onClick={handleDelete}>❌</button>
     </li>

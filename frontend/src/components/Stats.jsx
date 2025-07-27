@@ -15,7 +15,7 @@ export default function Stats({ items }) {
       <em>
         {percentage === 100
           ? <span className="complete">"You got everything! Let's go home!"</span>
-          : <span>You have ${numItems} items on your list, and you already packed ${numPacked} (${percentage}%)</span>}
+          : <span>You have {numItems} items on your list, and you already packed {numPacked} item ({percentage}%)</span>}
       </em>
       <h4>Németh Gábor - React Shopping List App</h4>
     </footer>

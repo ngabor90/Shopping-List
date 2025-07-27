@@ -22,7 +22,7 @@ export default function App() {
     fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(item),
+      body: JSON.stringify(item), // item: { name, quantity, note, packed }
     })
       .then((res) => res.json())
       .then((savedItem) => {
@@ -68,7 +68,7 @@ export default function App() {
     );
     if (!confirmed) return;
 
-    // Egyszerűen végig töröljük az elemeket 
+    // Egyszerűen végig töröljük az elemeket
     Promise.all(
       items.map((item) =>
         fetch(`${API_URL}/${item.id}`, {

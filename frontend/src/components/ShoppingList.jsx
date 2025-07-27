@@ -2,26 +2,19 @@ import { useState } from "react";
 import Item from "./Item";
 
 export default function ShoppingList({
-  items,
+  items = [], 
   onDeleteItem,
   onToggleItem,
   onClearList,
 }) {
   const [sortBy, setSortBy] = useState("input");
 
-  let sortedItems;
+  let sortedItems = [...items];
 
-  if (sortBy === "input") sortedItems = items;
-
-  if (sortBy === "description")
-    sortedItems = items
-      .slice()
-      .sort((a, b) => a.description.localeCompare(b.description));
-
+  if (sortBy === "name")
+    sortedItems.sort((a, b) => a.name.localeCompare(b.name));
   if (sortBy === "packed")
-    sortedItems = items
-      .slice()
-      .sort((a, b) => Number(a.packed) - Number(b.packed));
+    sortedItems.sort((a, b) => Number(a.packed) - Number(b.packed));
 
   return (
     <div className="list">
@@ -38,11 +31,13 @@ export default function ShoppingList({
 
       <div className="actions">
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value="input">Sort by input order</option>
-          <option value="description">Sort by name</option>
+          <option value="input">Sort by input</option>
+          <option value="name">Sort by name</option>
           <option value="packed">Sort by packed status</option>
         </select>
-        <button className="btn-clear" onClick={onClearList}>Clear list</button>
+        <button className="btn-clear" onClick={onClearList}>
+          Clear list
+        </button>
       </div>
     </div>
   );

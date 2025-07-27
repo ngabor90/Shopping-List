@@ -1,25 +1,33 @@
 import { useState } from "react";
 
 export default function Form({ onAddItems }) {
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [note, setNote] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!description) return;
+    if (!name) return;
 
-    const newItem = { description, quantity, packed: false };
+    const newItem = {
+      name,
+      quantity,
+      note,
+      packed: false,
+    };
 
     onAddItems(newItem);
 
-    setDescription("");
+    setName("");
     setQuantity(1);
+    setNote("");
   }
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <h3>What do you want to buy?</h3>
+
       <select
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
@@ -30,12 +38,21 @@ export default function Form({ onAddItems }) {
           </option>
         ))}
       </select>
+
       <input
         type="text"
-        placeholder="Item..."
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Item name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
+
+      <input
+        type="text"
+        placeholder="Note (optional)"
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
+      />
+
       <button>Add</button>
     </form>
   );

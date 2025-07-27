@@ -10,8 +10,9 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
+            $table->string('name');
             $table->integer('quantity')->default(1);
+            $table->string('note')->nullable();
             $table->boolean('packed')->default(false);
             $table->timestamps();
         });
