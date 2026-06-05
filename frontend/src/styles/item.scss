@@ -1,0 +1,177 @@
+.drag-handle {
+  cursor: grab;
+  color: var(--color-muted);
+  font-size: 1.8rem;
+  padding: 0 0.4rem;
+  user-select: none;
+  flex: unset;
+  min-width: unset;
+  max-width: unset;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.check-btn {
+  width: 2.8rem;
+  height: 2.8rem;
+  min-width: unset;
+  max-width: unset;
+  flex: unset;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-accent);
+  background-color: white;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  padding: 0;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  &.check-btn-checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+}
+
+.item-note {
+  font-style: italic;
+  margin-left: 0.5rem;
+  color: var(--color-muted);
+}
+
+.item-packed span {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  min-width: unset;
+  max-width: unset;
+  flex: unset;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  min-width: unset;
+  max-width: unset;
+  flex: unset;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.item-editing {
+  background-color: var(--color-secondary);
+  padding: 1.2rem 2rem;
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border: 2px solid var(--color-primary);
+}
+
+.edit-input {
+  flex: 2;
+  min-width: 100px;
+  max-width: 100%;
+  border-radius: 0.8rem;
+  border: 1.5px solid var(--color-accent);
+  background-color: white;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.5rem;
+}
+
+.edit-select {
+  flex: unset;
+  min-width: unset;
+  max-width: unset;
+  width: 6rem;
+  border-radius: 0.8rem;
+  border: 1.5px solid var(--color-accent);
+  background-color: white;
+  padding: 0.6rem 1rem;
+  font-size: 1.5rem;
+}
+
+.edit-save-btn {
+  background-color: var(--color-success);
+  color: white;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  min-width: unset;
+  max-width: unset;
+  flex: unset;
+  padding: 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-cancel-btn {
+  background-color: var(--color-muted);
+  color: white;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  min-width: unset;
+  max-width: unset;
+  flex: unset;
+  padding: 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+body.dark {
+  .check-btn {
+    background-color: #1a2a3a;
+    border-color: var(--color-accent);
+
+    &.check-btn-checked {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+  }
+
+  .edit-input,
+  .edit-select {
+    background-color: #0f1923;
+    color: var(--color-text);
+    border-color: var(--color-accent);
+  }
+}

@@ -1,0 +1,70 @@
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.dialog-box {
+  background-color: white;
+  border-radius: 1.6rem;
+  padding: 3rem 2.4rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dialog-message {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.dialog-btn {
+  flex: 1;
+  max-width: 160px;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  min-width: unset;
+
+  &.dialog-btn-cancel {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+
+    &:hover {
+      background-color: var(--color-accent);
+    }
+  }
+
+  &.dialog-btn-confirm {
+    background-color: var(--color-danger);
+    color: white;
+
+    &:hover {
+      background-color: #c62828;
+    }
+  }
+}
+
+body.dark .dialog-box {
+  background-color: #1a2a3a;
+}

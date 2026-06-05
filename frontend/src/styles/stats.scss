@@ -1,0 +1,46 @@
+.stats {
+  background-color: var(--color-primary);
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  padding: 2.4rem 1rem;
+  font-size: 1.6rem;
+}
+
+.complete {
+  background-color: var(--color-success);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 10rem;
+  font-weight: bold;
+}
+
+body.dark .stats {
+  background-color: #0d1f2d;
+  color: var(--color-text);
+}
+
+.app-footer {
+  background-color: var(--color-text);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 1.6rem 1rem;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  .auth-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.3rem;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+body.dark .app-footer {
+  background-color: #0a1520;
+}

@@ -1,0 +1,23 @@
+// ====== Light mode ======
+:root {
+  --color-bg: #f8fbff;
+  --color-primary: #4a90e2;
+  --color-secondary: #dceafd;
+  --color-accent: #b0d0f0;
+  --color-text: #1f3b57;
+  --color-muted: #7a8ca5;
+  --color-danger: #e57373;
+  --color-success: #1e7924;
+}
+
+// ====== Dark mode ======
+body.dark {
+  --color-bg: #0f1923;
+  --color-primary: #4a90e2;
+  --color-secondary: #1a2a3a;
+  --color-accent: #1e3a5f;
+  --color-text: #e8f0fe;
+  --color-muted: #7a8ca5;
+  --color-danger: #e57373;
+  --color-success: #4caf50;
+}
