@@ -7,5 +7,5 @@ Route::get('/', function () {
 });
 
 Route::get('/reset-password/{token}', function () {
-    return redirect('http://localhost:5173' . request()->getRequestUri());
+    return redirect(env('FRONTEND_URL') . request()->getRequestUri());
 })->name('password.reset');

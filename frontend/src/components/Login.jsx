@@ -3,7 +3,11 @@ import { useAuth } from "../context/useAuth";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-export default function Login({ onSwitchToRegister, onForgotPassword }) {
+export default function Login({
+  onSwitchToRegister,
+  onForgotPassword,
+  onPrivacyPolicy,
+}) {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -94,7 +98,8 @@ export default function Login({ onSwitchToRegister, onForgotPassword }) {
         <div className="auth-hero">
           <h2 className="auth-hero-title">Your smart shopping companion</h2>
           <p className="auth-hero-subtitle">
-            Keep track of everything you need to buy, organized and accessible anywhere.
+            Keep track of everything you need to buy, organized and accessible
+            anywhere.
           </p>
           <ul className="auth-features">
             <li>
@@ -119,6 +124,25 @@ export default function Login({ onSwitchToRegister, onForgotPassword }) {
             </li>
           </ul>
         </div>
+      </div>
+
+      <div className="auth-layout-footer">
+        <span className="footer-credit">
+          Created by:{" "}
+          <a
+            href="https://www.ngaborwebdev.hu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+          >
+            Németh Gábor
+          </a>{" "}
+          Fullstack Web Developer © {new Date().getFullYear()}
+        </span>
+
+        <button className="auth-link" onClick={onPrivacyPolicy}>
+          Privacy Policy
+        </button>
       </div>
     </div>
   );

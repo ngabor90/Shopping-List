@@ -17,6 +17,7 @@ import DarkToggle from "./DarkToggle";
 import SkeletonLoader from "./SkeletonLoader";
 import Footer from "./Footer";
 import PrivacyPolicy from "./PrivacyPolicy";
+import CookieBanner from "./CookieBanner";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -196,6 +197,16 @@ export default function App() {
       "/forgot-password",
     ].includes(window.location.pathname);
 
+    if (showPrivacy) {
+      return (
+        <PrivacyPolicy
+          onBack={() => setShowPrivacy(false)}
+          dark={dark}
+          onToggleDark={() => setDark(!dark)}
+        />
+      );
+    }
+
     return (
       <>
         <DarkToggle dark={dark} onToggle={() => setDark(!dark)} />
@@ -218,14 +229,22 @@ export default function App() {
           <Login
             onSwitchToRegister={() => setAuthView("register")}
             onForgotPassword={() => setAuthView("forgot")}
+            onPrivacyPolicy={() => setShowPrivacy(true)}
           />
         )}
+        <CookieBanner onPrivacyPolicy={() => setShowPrivacy(true)} />
       </>
     );
   }
 
   if (showPrivacy) {
-    return <PrivacyPolicy onBack={() => setShowPrivacy(false)} />;
+    return (
+      <PrivacyPolicy
+        onBack={() => setShowPrivacy(false)}
+        dark={dark}
+        onToggleDark={() => setDark(!dark)}
+      />
+    );
   }
 
   if (loading) {
@@ -282,7 +301,12 @@ export default function App() {
           onCancel={() => setConfirm(null)}
         />
       )}
-      <Footer onPrivacyPolicy={() => setShowPrivacy(true)} />
+      <Footer
+        onPrivacyPolicy={() => setShowPrivacy(true)}
+        dark={dark}
+        onToggleDark={() => setDark(!dark)}
+      />
+      <CookieBanner onPrivacyPolicy={() => setShowPrivacy(true)} />
     </div>
   );
 }

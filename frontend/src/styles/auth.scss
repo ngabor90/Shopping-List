@@ -209,6 +209,7 @@ body.dark {
   display: flex;
   flex-direction: row;
   background-color: var(--color-bg);
+  position: relative;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -360,4 +361,107 @@ body.dark {
 .policy-back {
   display: inline-block;
   margin-bottom: 2rem;
+}
+
+.auth-layout-footer {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.3rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: static;
+    padding: 2rem 1rem;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid var(--color-accent);
+  }
+}
+
+.footer-credit {
+  font-size: 1.3rem;
+  color: var(--color-muted);
+
+  .footer-link {
+    color: var(--color-muted);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+}
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-text);
+  color: white;
+  padding: 1.6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  z-index: 1001;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.cookie-text {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.cookie-btn {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 2.4rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: unset;
+  max-width: unset;
+  flex: unset;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--color-accent);
+  }
+}
+
+body.dark .cookie-banner {
+  background-color: #0a1520;
+}
+
+.cookie-policy-link {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  min-width: unset;
+  max-width: unset;
+  flex: unset;
+  text-decoration: underline;
+  font-family: inherit;
 }

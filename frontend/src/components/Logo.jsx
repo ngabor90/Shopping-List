@@ -12,7 +12,7 @@ export default function Logo({ onLogout, user, dark, onToggleDark }) {
   return (
     <>
       <div className="logo-wrapper">
-        <h1>Shopping list</h1>
+        <h1>Shop List</h1>
         {onLogout && (
           <div className="logo-right">
             {user && <span className="user-greeting">Hello, {user.name}!</span>}

@@ -2,7 +2,7 @@ export default function Stats({ items }) {
   if (!items.length)
     return (
       <p className="stats">
-        <em>Start adding some items to your shopping list - Németh Gábor React Shopping List App 2025</em>
+        <em>Start adding some items to your shopping list</em>
       </p>
     );
 
@@ -17,7 +17,6 @@ export default function Stats({ items }) {
           ? <span className="complete">"You got everything! Let's go home!"</span>
           : <span>You have {numItems} items on your list, and you already packed {numPacked} item ({percentage}%)</span>}
       </em>
-      <h4>Németh Gábor - React Shopping List App</h4>
     </footer>
   );
 }
