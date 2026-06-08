@@ -7,15 +7,13 @@ export default function Item({
   onEditItem,
   dragHandleProps,
 }) {
-  const [removing, setRemoving] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(item.name);
   const [editQuantity, setEditQuantity] = useState(item.quantity);
   const [editNote, setEditNote] = useState(item.note || "");
 
   function handleDelete() {
-    setRemoving(true);
-    setTimeout(() => onDeleteItem(item.id), 220);
+    onDeleteItem(item.id);
   }
 
   function handleSave() {
@@ -74,13 +72,16 @@ export default function Item({
   }
 
   return (
-    <li className={removing ? "item-exit" : "item-enter"}>
+    <li className={`item-enter ${item.packed ? "item-packed-row" : ""}`}>
       <span className="drag-handle" {...dragHandleProps}>
         ⠿
       </span>
       <button
         className={`check-btn ${item.packed ? "check-btn-checked" : ""}`}
-        onClick={() => onToggleItem(item.id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggleItem(item.id);
+        }}
         aria-label={item.packed ? "Mark as unpacked" : "Mark as packed"}
       >
         {item.packed ? "✓" : ""}

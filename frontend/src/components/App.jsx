@@ -93,12 +93,20 @@ export default function App() {
 
   // Elem törlése
   function handleDeleteItem(id) {
-    fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
-      headers: authHeaders(),
-    })
-      .then(() => setItems((items) => items.filter((item) => item.id !== id)))
-      .catch(() => showToast("Failed to delete item."));
+    setConfirm({
+      message: "Are you sure you want to delete this item?",
+      onConfirm: () => {
+        setConfirm(null);
+        fetch(`${API_URL}/${id}`, {
+          method: "DELETE",
+          headers: authHeaders(),
+        })
+          .then(() =>
+            setItems((items) => items.filter((item) => item.id !== id)),
+          )
+          .catch(() => showToast("Failed to delete item."));
+      },
+    });
   }
 
   // Packed toggle

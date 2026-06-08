@@ -175,3 +175,15 @@ body.dark {
     border-color: var(--color-accent);
   }
 }
+
+.list li {
+  transition: background-color 0.2s;
+}
+
+.list li.item-packed-row {
+  background-color: #b0d0f0;
+}
+
+body.dark .list li.item-packed-row {
+  background-color: rgba(74, 144, 226, 0.2);
+}
