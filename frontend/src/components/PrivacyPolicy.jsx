@@ -58,6 +58,10 @@ export default function PrivacyPolicy({ onBack, dark, onToggleDark }) {
             <a href="mailto:n.gabor90@gmail.com">n.gabor90@gmail.com</a>
           </p>
         </div>
+
+        <button className="auth-link policy-back" onClick={onBack}>
+          ← Back to Sign in
+        </button>
       </div>
     </div>
   );

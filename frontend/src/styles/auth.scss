@@ -213,7 +213,6 @@ body.dark {
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding-bottom: 8rem;
   }
 }
 
@@ -229,14 +228,12 @@ body.dark {
   font-size: 1.3rem;
 
   @media (max-width: 768px) {
+    position: static;
     width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background-color: var(--color-bg);
-    padding: 1.5rem 1rem;
-    border-top: 1px solid var(--color-accent);
+    order: 3;
+    padding: 2rem 1rem;
     text-align: center;
+    align-items: center;
   }
 }
 
@@ -246,6 +243,10 @@ body.dark {
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
+
+  @media (max-width: 768px) {
+    order: 1;
+  }
 }
 
 .auth-right {
@@ -257,7 +258,7 @@ body.dark {
   padding: 4rem 3rem;
 
   @media (max-width: 768px) {
-    order: 1;
+    order: 2;
     padding: 3rem 2rem;
   }
 }
@@ -386,7 +387,6 @@ body.dark {
   display: inline-block;
   margin-bottom: 2rem;
 }
-
 
 .footer-credit {
   font-size: 1.3rem;
