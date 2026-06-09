@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/email/resend', [AuthController::class, 'resendVerification']);
     Route::post('/items/reorder', [ItemController::class, 'reorder'])->middleware('verified');
+    Route::delete('/items', [ItemController::class, 'destroyAll'])->middleware('verified');
     Route::apiResource('items', ItemController::class)->middleware('verified');
 });

@@ -76,4 +76,10 @@ class ItemController extends Controller
 
         return response()->json(['message' => 'Reordered.']);
     }
+
+    public function destroyAll(Request $request)
+    {
+        $request->user()->items()->delete();
+        return response()->json(null, 204);
+    }
 }
