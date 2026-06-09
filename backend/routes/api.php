@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/email/resend', [AuthController::class, 'resendVerification']);
-    Route::apiResource('items', ItemController::class)->middleware('verified');
     Route::post('/items/reorder', [ItemController::class, 'reorder'])->middleware('verified');
+    Route::apiResource('items', ItemController::class)->middleware('verified');
 });

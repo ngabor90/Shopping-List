@@ -132,17 +132,17 @@ class AuthController extends Controller
         $user = User::findOrFail($id);
 
         if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
-            return redirect(env('FRONTEND_URL') . '/?verified=error');
+            return redirect(config('app.frontend_url') . '/?verified=error');
         }
 
         if ($user->hasVerifiedEmail()) {
-            return redirect(env('FRONTEND_URL') . '/?verified=1');
+            return redirect(config('app.frontend_url') . '/?verified=1');
         }
 
         $user->markEmailAsVerified();
         event(new Verified($user));
 
-        return redirect(env('FRONTEND_URL') . '/?verified=1');
+        return redirect(config('app.frontend_url') . '/?verified=1');
     }
 
     public function resendVerification(Request $request)

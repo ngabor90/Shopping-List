@@ -7,5 +7,5 @@ Route::get('/', function () {
 });
 
 Route::get('/reset-password/{token}', function () {
-    return redirect(env('FRONTEND_URL') . request()->getRequestUri());
+    return redirect(config('app.frontend_url') . request()->getRequestUri());
 })->name('password.reset');

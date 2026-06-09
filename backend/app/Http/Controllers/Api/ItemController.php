@@ -30,12 +30,6 @@ class ItemController extends Controller
         return response()->json($item, 201);
     }
 
-    public function show(Request $request, Item $item)
-    {
-        $this->authorize($request->user(), $item);
-        return $item;
-    }
-
     public function update(Request $request, Item $item)
     {
         $this->authorize($request->user(), $item);
