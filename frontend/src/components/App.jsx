@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Logo from "./Logo";
 import Form from "./Form";
 import ShoppingList from "./ShoppingList";
@@ -20,26 +20,33 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import CookieBanner from "./CookieBanner";
 
 const API_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function App() {
   const { token, logout, user, needsVerify, setNeedsVerify } = useAuth();
   const [items, setItems] = useState([]);
-  const [authView, setAuthView] = useState("login"); // "login" | "register" | "forgot"
+  const [authView, setAuthView] = useState("login");
   const [loading, setLoading] = useState(true);
-  const [toast, setToast] = useState(null); // { message, type }
-  const [confirm, setConfirm] = useState(null); // { message, onConfirm }
+  const [toast, setToast] = useState(null);
+  const [confirm, setConfirm] = useState(null);
   const [dark, setDark] = useDarkMode();
   const [showPrivacy, setShowPrivacy] = useState(false);
 
-  // Auth headers helper
-  function authHeaders() {
+  const path = window.location.pathname;
+  const isResetPage = path.startsWith("/reset-password/");
+  const isKnownPage = ["", "/", "/login", "/register", "/forgot-password"].includes(path);
+
+  const authHeaders = useCallback(() => {
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-  }
+  }, [token]);
 
-  // Backendről betöltés
+  const showToast = useCallback((message, type = "error") => {
+    setToast({ message, type });
+  }, []);
+
   useEffect(() => {
     if (!token) {
       setLoading(false);
@@ -47,10 +54,7 @@ export default function App() {
     }
 
     fetch(API_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: authHeaders(),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -61,9 +65,20 @@ export default function App() {
         showToast("Failed to load items.");
         setLoading(false);
       });
-  }, [token]);
+  }, [token, authHeaders, showToast]);
 
-  // Új elem hozzáadása
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const verified = params.get("verified");
+    if (verified === "1") {
+      showToast("Email verified successfully!", "success");
+      window.history.replaceState({}, "", "/");
+    } else if (verified === "error") {
+      showToast("Email verification failed. Please try again.", "error");
+      window.history.replaceState({}, "", "/");
+    }
+  }, [showToast]);
+
   function handleAddItems(item) {
     fetch(API_URL, {
       method: "POST",
@@ -75,7 +90,6 @@ export default function App() {
       .catch(() => showToast("Failed to add item."));
   }
 
-  // Elem módosítása
   function handleEditItem(id, updates) {
     fetch(`${API_URL}/${id}`, {
       method: "PATCH",
@@ -91,7 +105,6 @@ export default function App() {
       .catch(() => showToast("Failed to update item."));
   }
 
-  // Elem törlése
   function handleDeleteItem(id) {
     setConfirm({
       message: "Are you sure you want to delete this item?",
@@ -109,7 +122,6 @@ export default function App() {
     });
   }
 
-  // Packed toggle
   function handleToggleItem(id) {
     const itemToToggle = items.find((item) => item.id === id);
     if (!itemToToggle) return;
@@ -128,20 +140,15 @@ export default function App() {
       .catch(() => showToast("Failed to toggle item."));
   }
 
-  // Lista törlése
   function handleClearList() {
     setConfirm({
       message: "Are you sure you want to delete all items?",
       onConfirm: () => {
         setConfirm(null);
-        Promise.all(
-          items.map((item) =>
-            fetch(`${API_URL}/${item.id}`, {
-              method: "DELETE",
-              headers: authHeaders(),
-            }),
-          ),
-        )
+        fetch(API_URL, {
+          method: "DELETE",
+          headers: authHeaders(),
+        })
           .then(() => {
             setItems([]);
             showToast("List cleared successfully.", "success");
@@ -151,26 +158,19 @@ export default function App() {
     });
   }
 
-  // Toast megjelenítése
-  function showToast(message, type = "error") {
-    setToast({ message, type });
-  }
-
-  // Lista újrarendezése
   function handleReorder(reorderedItems) {
     setItems(reorderedItems);
 
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/items/reorder`, {
+    fetch(`${API_BASE_URL}/items/reorder`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({ items: reorderedItems.map((i) => i.id) }),
     }).catch(() => showToast("Failed to save order."));
   }
 
-  // Logout
   async function handleLogout() {
     try {
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}/logout`, {
+      await fetch(`${API_BASE_URL}/logout`, {
         method: "POST",
         headers: authHeaders(),
       });
@@ -194,17 +194,7 @@ export default function App() {
     );
   }
 
-  // Auth oldalak
   if (!token) {
-    const isResetPage = window.location.pathname.startsWith("/reset-password/");
-    const isKnownPage = [
-      "",
-      "/",
-      "/login",
-      "/register",
-      "/forgot-password",
-    ].includes(window.location.pathname);
-
     if (showPrivacy) {
       return (
         <PrivacyPolicy
@@ -270,11 +260,7 @@ export default function App() {
     );
   }
 
-  const knownPaths = ["", "/"];
-  if (
-    !knownPaths.includes(window.location.pathname) &&
-    !window.location.pathname.startsWith("/reset-password/")
-  )
+  if (!isKnownPage && !isResetPage)
     return <NotFound onGoHome={() => window.location.replace("/")} />;
 
   return (
